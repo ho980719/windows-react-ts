@@ -1,29 +1,30 @@
 import logo from './logo.svg';
 import './App.css';
-import './Reset.css';
+import {Chrome} from "./component/Chrome";
+import {useState} from "react";
 
 function App() {
+    let [desktopPrograms, setDesktopPrograms] = useState({'chrome': false})
+
+    const openProgram = (id) => {
+        let copy = {...desktopPrograms};
+        copy[id] = true;
+        setDesktopPrograms(copy);
+    }
+
     return (
         <div className="App" style={{backgroundImage: "url(/assets/images/img0_1366x768.jpg)"}}>
-            <div className='layout-chrome'>
-                <div className='chrome-appbar'>
-                    <div className='chrome-appbar-tab'></div>
-                    <div className='chrome-appbar-btn'>
-                        <span><i className="fa-solid fa-minus"></i></span>
-                        <span><i className="fa-regular fa-window-maximize"></i></span>
-                        <span><i className="fa-solid fa-xmark"></i></span>
-                    </div>
-                </div>
-            </div>
             <div className='desktop'>
-                <div className='desktop-icon'>
-                    <img src='/assets/images/free-icon-chrome-888846.png' />
+                <div className='desktop-icon' data-id={'chrome'} onDoubleClick={(event) => {
+                    openProgram(event.currentTarget.dataset.id);
+                }}>
+                    <img src='/assets/images/free-icon-chrome-888846.png'/>
                     <p>Chrome</p>
                 </div>
-                <div className='desktop-icon'>
-                    <img src='/assets/images/free-icon-chrome-888846.png' />
+                {/*<div className='desktop-icon'>
+                    <img src='/assets/images/free-icon-chrome-888846.png'/>
                     <p>Chrome</p>
-                </div>
+                </div>*/}
             </div>
             <div className='footer-bar'>
                 <div className='footer-bar-icon-box'>
@@ -38,6 +39,7 @@ function App() {
                     </div>
                 </div>
             </div>
+            {desktopPrograms.chrome && <Chrome desktopPrograms={desktopPrograms} setDesktopPrograms={setDesktopPrograms}/>}
         </div>
     );
 }
