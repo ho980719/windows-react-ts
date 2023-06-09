@@ -2,6 +2,13 @@ import Draggable from "react-draggable";
 import {useEffect, useRef, useState} from "react";
 
 export const Chrome = (props) => {
+    const inputRef = useRef(null);
+    const handleFocus = () => {
+        if (inputRef.current) {
+            inputRef.current.select();
+        }
+    };
+
     const desktopHeight = document.querySelector('.desktop').clientHeight - 40;
 
     const [layoutStyle, setLayoutStyle] = useState({width: '500px', height: '500px', top: 0, left: 0});
@@ -10,6 +17,7 @@ export const Chrome = (props) => {
 
     const [previousPosition, setPreviousPosition] = useState({x: 0, y: 0});
     const [currentPosition, setCurrentPosition] = useState({x: 0, y: 0});
+    const [beforePosition, setBeforePosition] = useState({x: 0, y: 0});
     // 창 최소화
     const minimumChrome = () => {
         let layout = document.querySelector('.layout-chrome');
@@ -25,6 +33,8 @@ export const Chrome = (props) => {
             setLayoutClass('layout-chrome');
             setLayoutMax(false);
         } else {
+            // 최대화 직전 position state 저장
+            setBeforePosition({x: currentPosition.x, y: currentPosition.y});
             layout.classList.add('layout-chrome-max');
             setLayoutStyle({width: '100%', height: `${desktopHeight}px`, top: 0, left: 0})
             setLayoutClass('layout-chrome layout-chrome-max')
@@ -51,6 +61,7 @@ export const Chrome = (props) => {
 
     useEffect(() => {
         if (layoutMax) initializePosition();
+        else setCurrentPosition({ x: beforePosition.x, y: beforePosition.y });
     }, [layoutMax]);
 
     return (
@@ -66,12 +77,42 @@ export const Chrome = (props) => {
                 nodeRef={dragRef}
             >
                 <div className={layoutClass} style={layoutStyle} ref={dragRef}>
-                    {/*<div className='chrome-tabs'>
-                    <div className='chrome-tab-item'>
-                        <span>icon</span>
-                        <p>React App</p>
+                    <div className='chrome-tabs'>
+                        <ul>
+                            <li className="list-item">
+                                <b className="left-curve"></b>
+                                <b className="right-curve"></b>
+                                <a>
+                                    <i className="fa fa-home"></i>
+                                    Home
+                                </a>
+                            </li>
+                            <li className="list-item">
+                                <b className="left-curve"></b>
+                                <b className="right-curve"></b>
+                                <a>
+                                    <i className="fa fa-book"></i>
+                                    My Courses
+                                </a>
+                            </li>
+                            <li className="list-item ">
+                                <b className="left-curve"></b>
+                                <b className="right-curve"></b>
+                                <a>
+                                    <i className="fa fa-user"></i>
+                                    My Profile
+                                </a>
+                            </li>
+                            <li className="list-item active">
+                                <b className="left-curve"></b>
+                                <b className="right-curve"></b>
+                                <a>
+                                    <i className="fa fa-star"></i>
+                                    Go Premium
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-                </div>*/}
                     <div className='chrome-appbar' onDoubleClick={maximumChrome}>
                         <div className='chrome-appbar-tab'>
 
@@ -85,17 +126,17 @@ export const Chrome = (props) => {
                     <div className='chrome-appbar-bottom'>
                         <div className='chrome-navigate'>
                             <div className='chrome-navigate-btn'>
-                                <span><i className="fa-solid fa-arrow-left"></i></span>
+                                <span className='icon-disabled'><i className="fa-solid fa-arrow-left"></i></span>
                                 <span className='icon-disabled'><i className="fa-solid fa-arrow-right"></i></span>
                                 <span><i className="fa-solid fa-rotate-right"></i></span>
                             </div>
                         </div>
                         <div className='chrome-url'>
                             <span className="material-symbols-outlined url-info">info</span>
-                            <input type={'text'} defaultValue={'localhost:3000/home'}/>
+                            <input type={'text'} onFocus={handleFocus} ref={inputRef} defaultValue={'localhost:3000/home'}/>
                         </div>
                         <div className='chrome-appbar-bottom-btn'>
-                            <span>icons</span>
+                            {/*<span>icons</span>*/}
                         </div>
                     </div>
                 </div>
