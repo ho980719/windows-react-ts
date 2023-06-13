@@ -227,26 +227,24 @@
 }*/
 
 .chrome-tabs {
-    position: fixed;
-    left: 0px;
-    top: 0px;
+    /*position: fixed;*/
     display: flex;
-    min-width: 45px;
-    max-width: 250px;
     width: 100%;
 }
 
 .chrome-tabs ul {
     display: flex;
     list-style-type: none;
+    margin-top: 3px;
     margin-bottom: 0px;
     padding-left: 10px;
 }
 
 .chrome-tabs ul li {
+    padding: 10px;
     display: inline;
     list-style: none;
-    font-size: 1rem;
+    font-size: 0.9rem;
     border-radius: 20px 20px 0px 0px;
     position: relative;
 }
@@ -261,7 +259,7 @@
 }
 
 .chrome-tabs ul li.active a {
-    color: #308d46;
+    color: black;
 }
 
 .chrome-tabs ul li b.left-curve {
@@ -282,7 +280,7 @@
     width: 100%;
     height: 100%;
     border-bottom-right-radius: 20px;
-    background: #308d46;
+    background: #e8eaed;
 }
 
 .chrome-tabs ul li b.right-curve {
@@ -303,7 +301,7 @@
     top: 0;
     height: 100%;
     border-bottom-left-radius: 20px;
-    background: #308d46;
+    background: #e8eaed;
 }
 
 .chrome-tabs ul li.active b.left-curve,

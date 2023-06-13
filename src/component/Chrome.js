@@ -77,45 +77,42 @@ export const Chrome = (props) => {
                 nodeRef={dragRef}
             >
                 <div className={layoutClass} style={layoutStyle} ref={dragRef}>
-                    <div className='chrome-tabs'>
-                        <ul>
-                            <li className="list-item">
-                                <b className="left-curve"></b>
-                                <b className="right-curve"></b>
-                                <a>
-                                    <i className="fa fa-home"></i>
-                                    Home
-                                </a>
-                            </li>
-                            <li className="list-item">
-                                <b className="left-curve"></b>
-                                <b className="right-curve"></b>
-                                <a>
-                                    <i className="fa fa-book"></i>
-                                    My Courses
-                                </a>
-                            </li>
-                            <li className="list-item ">
-                                <b className="left-curve"></b>
-                                <b className="right-curve"></b>
-                                <a>
-                                    <i className="fa fa-user"></i>
-                                    My Profile
-                                </a>
-                            </li>
-                            <li className="list-item active">
-                                <b className="left-curve"></b>
-                                <b className="right-curve"></b>
-                                <a>
-                                    <i className="fa fa-star"></i>
-                                    Go Premium
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                     <div className='chrome-appbar' onDoubleClick={maximumChrome}>
-                        <div className='chrome-appbar-tab'>
-
+                        <div className='chrome-tabs'>
+                            <ul>
+                                <li className="list-item">
+                                    <b className="left-curve"></b>
+                                    <b className="right-curve"></b>
+                                    <a>
+                                        <i className="fa fa-home"></i>
+                                        Home
+                                    </a>
+                                </li>
+                                <li className="list-item">
+                                    <b className="left-curve"></b>
+                                    <b className="right-curve"></b>
+                                    <a>
+                                        <i className="fa fa-book"></i>
+                                        My Courses
+                                    </a>
+                                </li>
+                                <li className="list-item">
+                                    <b className="left-curve"></b>
+                                    <b className="right-curve"></b>
+                                    <a>
+                                        <i className="fa fa-user"></i>
+                                        My Profile
+                                    </a>
+                                </li>
+                                <li className="list-item active">
+                                    <b className="left-curve"></b>
+                                    <b className="right-curve"></b>
+                                    <a>
+                                        <i className="fa fa-star"></i>
+                                        Go Premium
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                         <div className='chrome-appbar-btn'>
                             <span onClick={minimumChrome}><i className="fa-solid fa-minus"></i></span>
