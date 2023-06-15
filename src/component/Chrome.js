@@ -2,6 +2,12 @@ import Draggable from "react-draggable";
 import {useEffect, useRef, useState} from "react";
 
 export const Chrome = (props) => {
+    // layout ------------------------------------------------------------
+    useEffect(() => {
+        console.log('최초')
+        maximumChrome();
+    }, [])
+
     const inputRef = useRef(null);
     const handleFocus = () => {
         if (inputRef.current) {
@@ -12,7 +18,7 @@ export const Chrome = (props) => {
     const desktopHeight = document.querySelector('.desktop').clientHeight - 40;
 
     const [layoutStyle, setLayoutStyle] = useState({width: '500px', height: '500px', top: 0, left: 0});
-    const [layoutClass, setLayoutClass] = useState('layout-chrome');
+    const [layoutClass, setLayoutClass] = useState('layout-chrome layout-chrome-max');
     const [layoutMax, setLayoutMax] = useState(false);
 
     const [previousPosition, setPreviousPosition] = useState({x: 0, y: 0});
@@ -64,6 +70,47 @@ export const Chrome = (props) => {
         else setCurrentPosition({ x: beforePosition.x, y: beforePosition.y });
     }, [layoutMax]);
 
+    // tab ------------------------------------------------------------
+    // tab active
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [tabs, setTabs] = useState([1]);
+
+    // 탭 추가
+    const addTab = () => {
+        let copy = [...tabs];
+        copy.push(1);
+        setTabs(copy);
+
+        // activeIndex 변경
+        selectTab(copy.length - 1);
+    }
+
+    // 탭 삭제
+    const removeTab = (id) => {
+        let copy = [...tabs];
+        copy.splice(id, 1);
+        setTabs(copy);
+
+        if (tabs.length == 1) {
+            closeChrome();
+        }
+    }
+    
+
+    useEffect(() => {
+        return () => {
+            // if (tabs.length == beforeTabLength) {
+            //     console.log('index change')
+            //     setActiveIndex(0);
+            // }
+        }
+    }, [tabs]);
+
+    // 탭 이동
+    const selectTab = (index) => {
+        setActiveIndex(index);
+    }
+
     return (
         <>
             {/*<Draggable handle='.chrome-appbar' cancel='.chrome-appbar-btn'>*/}
@@ -80,38 +127,26 @@ export const Chrome = (props) => {
                     <div className='chrome-appbar' onDoubleClick={maximumChrome}>
                         <div className='chrome-tabs'>
                             <ul>
-                                <li className="list-item">
-                                    <b className="left-curve"></b>
-                                    <b className="right-curve"></b>
-                                    <a>
-                                        <i className="fa fa-home"></i>
-                                        Home
-                                    </a>
-                                </li>
-                                <li className="list-item">
-                                    <b className="left-curve"></b>
-                                    <b className="right-curve"></b>
-                                    <a>
-                                        <i className="fa fa-book"></i>
-                                        My Courses
-                                    </a>
-                                </li>
-                                <li className="list-item">
-                                    <b className="left-curve"></b>
-                                    <b className="right-curve"></b>
-                                    <a>
-                                        <i className="fa fa-user"></i>
-                                        My Profile
-                                    </a>
-                                </li>
-                                <li className="list-item active">
-                                    <b className="left-curve"></b>
-                                    <b className="right-curve"></b>
-                                    <a>
-                                        <i className="fa fa-star"></i>
-                                        Go Premium
-                                    </a>
-                                </li>
+                                {
+                                    tabs.map((value, index) => {
+                                        return (
+                                            <li data-index={index} className={index == activeIndex ? 'list-item active' : 'list-item'} onClick={() => {selectTab(index)}} key={index}>
+                                                <b className="left-curve"></b>
+                                                <b className="right-curve"></b>
+                                                <div className='tab-content'>
+                                                    <img src='/assets/images/free-icon-chrome-888846.png' />
+                                                    <a>New Tab</a>
+                                                    <span className='tab-close-btn' onClick={() => {removeTab(index)}}>
+                                                        <i className='fa-solid fa-xmark'></i>
+                                                    </span>
+                                                </div>
+                                            </li>
+                                        )
+                                    })
+                                }
+                                <span className='tab-plus' onClick={addTab}>
+                                    <i className='fa-solid fa-plus'></i>
+                                </span>
                             </ul>
                         </div>
                         <div className='chrome-appbar-btn'>

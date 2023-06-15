@@ -115,7 +115,7 @@
 
 .chrome-appbar {
     width: 100%;
-    height: 37px;
+    height: 35px;
     background-color: #e8eaed;
     display: flex;
     justify-content: space-between;
@@ -227,30 +227,44 @@
 }*/
 
 .chrome-tabs {
-    /*position: fixed;*/
     display: flex;
     width: 100%;
+    overflow: hidden;
 }
 
 .chrome-tabs ul {
     display: flex;
     list-style-type: none;
-    margin-top: 3px;
+    margin-top: 2px;
     margin-bottom: 0px;
     padding-left: 10px;
+    width: 100%;
 }
 
 .chrome-tabs ul li {
-    padding: 10px;
-    display: inline;
     list-style: none;
     font-size: 0.9rem;
-    border-radius: 20px 20px 0px 0px;
+    border-radius: 10px 10px 0px 0px;
     position: relative;
+    flex: 1;
+    max-width: 220px;
 }
 
 .chrome-tabs ul li.active {
     background: #fff;
+}
+
+/* @todo 수정 필요 */
+.chrome-tabs ul li:not(.active)::after{
+    position:absolute;
+    content:'';
+    top:42%;
+    transform: translateY(-42%);
+    right:0;
+    width:1px;
+    height:20px;
+    margin: auto 0;
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 .chrome-tabs ul li a {
@@ -279,7 +293,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    border-bottom-right-radius: 20px;
+    border-bottom-right-radius: 10px;
     background: #e8eaed;
 }
 
@@ -300,7 +314,7 @@
     width: 100%;
     top: 0;
     height: 100%;
-    border-bottom-left-radius: 20px;
+    border-bottom-left-radius: 10px;
     background: #e8eaed;
 }
 
@@ -311,4 +325,50 @@
 
 .icon-disabled {
     color: #babcbe !important;
+}
+
+.tab-content {
+    margin: 7px 5px 5px 10px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    position: relative;
+}
+
+.tab-content img {
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+}
+
+.tab-close-btn {
+    position: absolute;
+    right: 5px;
+    width: 15px;
+    height: 15px;
+    border-radius: 25px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+}
+
+.tab-close-btn:hover {
+    background-color: #dcdcdd;
+}
+
+.tab-plus {
+    color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 25px;
+    margin-left: 10px;
+    z-index: 10;
+}
+
+.tab-plus:hover {
+    background-color: #c3c5ca;
+    transition: 0.3s;
 }

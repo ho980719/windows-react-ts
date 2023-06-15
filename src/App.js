@@ -21,10 +21,10 @@ function App() {
                     <img src='/assets/images/free-icon-chrome-888846.png'/>
                     <p>Chrome</p>
                 </div>
-                {/*<div className='desktop-icon'>
-                    <img src='/assets/images/free-icon-chrome-888846.png'/>
-                    <p>Chrome</p>
-                </div>*/}
+                <div className='desktop-icon'>
+                    <img src='/assets/images/dogi.png'/>
+                    <p>Dogi</p>
+                </div>
             </div>
             <div className='footer-bar'>
                 <div className='footer-bar-icon-box'>
@@ -39,6 +39,7 @@ function App() {
                     </div>
                 </div>
             </div>
+
             {desktopPrograms.chrome && <Chrome desktopPrograms={desktopPrograms} setDesktopPrograms={setDesktopPrograms}/>}
         </div>
     );
