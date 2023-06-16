@@ -39,6 +39,7 @@ export const Chrome = (props) => {
             setLayoutClass('layout-chrome');
             setLayoutMax(false);
         } else {
+            console.log(desktopHeight)
             // 최대화 직전 position state 저장
             setBeforePosition({x: currentPosition.x, y: currentPosition.y});
             layout.classList.add('layout-chrome-max');
@@ -171,6 +172,7 @@ export const Chrome = (props) => {
                             {/*<span>icons</span>*/}
                         </div>
                     </div>
+                    {/*<iframe src='https://www.google.com/webhp?igu=1' width='100%' height='100%'/>*/}
                 </div>
             </Draggable>
         </>
